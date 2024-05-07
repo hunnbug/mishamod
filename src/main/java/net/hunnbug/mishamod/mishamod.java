@@ -41,7 +41,7 @@ public class mishamod
 
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
-
+                                                                                                            //mod by humbug
         MinecraftForge.EVENT_BUS.register(this);
     }
 
