@@ -1,5 +1,6 @@
 package net.hunnbug.mishamod.item;
 
+import net.hunnbug.mishamod.item.custom.mishaboomitem;
 import net.hunnbug.mishamod.mishamod;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -15,7 +16,5 @@ public class ModItems {
     public static void register(IEventBus eventBus) { ITEMS.register(eventBus); }
 
     public static final RegistryObject<Item> MISHAYEBAT
-            = ITEMS.register("misha", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_TOOLS)));
-
-
+            = ITEMS.register("misha", () -> new mishaboomitem(new Item.Properties().tab(CreativeModeTab.TAB_TOOLS).stacksTo(16)));
 }
