@@ -1,7 +1,10 @@
 package net.hunnbug.mishamod;
 
 import com.mojang.logging.LogUtils;
+import net.hunnbug.mishamod.entity.ModEntities;
 import net.hunnbug.mishamod.item.ModItems;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -26,12 +29,9 @@ import org.slf4j.Logger;
 public class mishamod
 {
     public static final String MOD_ID = "mishamod";
-    private static final Logger LOGGER = LogUtils.getLogger();
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
 
-    public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)));
-    public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+
+
 
     public mishamod()
     {
@@ -39,8 +39,9 @@ public class mishamod
         ModItems.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
 
-        BLOCKS.register(modEventBus);
-        ITEMS.register(modEventBus);
+        //BLOCKS.register(modEventBus);
+        ModItems.register(modEventBus);
+        ModEntities.register(modEventBus);
                                                                                                             //mod by humbug
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -61,6 +62,7 @@ public class mishamod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+            EntityRenderers.register(ModEntities.MISHA_PROJECTILE.get(), ThrownItemRenderer::new);
         }
     }
 }

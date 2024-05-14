@@ -1,5 +1,7 @@
 package net.hunnbug.mishamod.entity.custom;
 
+import net.hunnbug.mishamod.entity.ModEntities;
+import net.hunnbug.mishamod.item.ModItems;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -14,26 +16,27 @@ public class mishaboomprojectile extends ThrowableItemProjectile {
         super(entityType, level);
     }
 
+
     public mishaboomprojectile(Level level) {
-        super(, level);
+        super(ModEntities.MISHA_PROJECTILE.get(), level);
     }
 
     public mishaboomprojectile(Level level, LivingEntity livingEntity) {
-        super(, livingEntity, level);
+        super(ModEntities.MISHA_PROJECTILE.get(), livingEntity, level);
     }
 
 
 
     @Override
     protected Item getDefaultItem() {
-        return null;
+        return ModItems.MISHAYEBAT.get();
     }
 
     @Override
     protected void onHitBlock(BlockHitResult res) {
         if(!this.level.isClientSide()){
             this.level.broadcastEntityEvent(this, (byte)3);
-            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 15.0F, Explosion.BlockInteraction.BREAK);
+            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 30.0F, Explosion.BlockInteraction.BREAK);
         }
 
         super.onHitBlock(res);
