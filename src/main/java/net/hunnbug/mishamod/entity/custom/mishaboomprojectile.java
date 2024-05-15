@@ -16,6 +16,8 @@ public class mishaboomprojectile extends ThrowableItemProjectile {
         super(entityType, level);
     }
 
+    private boolean hasExploded = false;
+
 
     public mishaboomprojectile(Level level) {
         super(ModEntities.MISHA_PROJECTILE.get(), level);
@@ -26,7 +28,6 @@ public class mishaboomprojectile extends ThrowableItemProjectile {
     }
 
 
-
     @Override
     protected Item getDefaultItem() {
         return ModItems.MISHAYEBAT.get();
@@ -34,9 +35,10 @@ public class mishaboomprojectile extends ThrowableItemProjectile {
 
     @Override
     protected void onHitBlock(BlockHitResult res) {
-        if(!this.level.isClientSide()){
+        if(!this.level.isClientSide() && !this.hasExploded){
             this.level.broadcastEntityEvent(this, (byte)3);
-            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 30.0F, Explosion.BlockInteraction.BREAK);
+            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 70.0F, Explosion.BlockInteraction.BREAK);
+            this.hasExploded = true;
         }
 
         super.onHitBlock(res);

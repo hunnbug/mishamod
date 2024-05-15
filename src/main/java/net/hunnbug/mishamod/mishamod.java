@@ -36,12 +36,11 @@ public class mishamod
     public mishamod()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        ModEntities.register(modEventBus);
         ModItems.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
 
         //BLOCKS.register(modEventBus);
-        ModItems.register(modEventBus);
-        ModEntities.register(modEventBus);
                                                                                                             //mod by humbug
         MinecraftForge.EVENT_BUS.register(this);
     }
